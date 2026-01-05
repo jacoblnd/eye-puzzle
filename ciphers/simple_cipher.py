@@ -146,19 +146,85 @@ class DeckCipher:
             deck_state = self.map_state(deck_state, identity_symbol)
         return plaintext
 
+"""The 15-symbol deck containing 12 PT symbols:"""
 identity_deck = "ZACDEHILMNORSXY"
 permutation_decks = {
     "A": "ACRESZDHILMNOXY",
     "C": "CHLORINEZADMSXY",
     "D": "DENIALZCHMORSXY",
     "E": "ECHOZADILMNRSXY",
-    "H": "HELIOSZACDMNRXY"
+    "H": "HELIOSZACDMNRXY",
+    "I": "IDOLSZACEHMNRXY",
+    "L": "LORDSZACEHIMNXY",
+    "M": "MAZESCDHILNORXY",
+    "N": "NORDICZAEHLMSXY",
+    "O": "ORCHIDZAELMNSXY",
+    "R": "RANCIDZEHLMOSXY",
+    "S": "SCAREDZHILMNOXY",
 }
 simple_cipher = DeckCipher.from_decks(identity_deck, permutation_decks)
 
+def word_deck(identity_deck: str, word: str) -> str:
+    """Helper function for generating the full permutation deck for a cipher given
+    the identity deck and a starting word.
+    Always writes the rest of the deck in identity-deck order.
+    """
+    permutation_deck = word
+    for symbol in identity_deck:
+        if symbol not in permutation_deck:
+            permutation_deck += symbol
+    return permutation_deck
+
 def cipher_decipher(cipher, plaintext: str):
     ciphertext = cipher.encipher(plaintext)
-    print("Ciphertext: ", ciphertext)
-    print("Decrypted Ciphertext: ", cipher.decipher(ciphertext))
+    print("Ciphertext: \t\t", ciphertext)
+    print("Decrypted Ciphertext: \t", cipher.decipher(ciphertext))
 
-cipher_decipher(simple_cipher, "ACEDHEEDHEEDHEEDHEEDHEED")
+cipher_decipher(simple_cipher, "SHARDSACROSSMORDORACROSSMORDORACROSSMORDOR")
+"""
+Ciphertext:              SDERLIODLOMAOERANDMZNMLHMCEHRZLSRLNALOCAES
+Decrypted Ciphertext:    SHARDSACROSSMORDORACROSSMORDORACROSSMORDOR
+"""
+
+"""
+A full 27-character alphabet (including space) with 10 ciphertext-only symbols:
+"""
+
+full_identity_deck = "!@#$%^*( ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+permutation_words = [
+    "APRICOT",
+    "BRICKED",
+    "CURVED",
+    "DELIGHT",
+    "EXHAUSTING",
+    "FLUORIDE",
+    "GELATIN",
+    "HYPERBOLIC",
+    "INOCULATE",
+    "JUXTAPOSED",
+    "KILT",
+    "LOGARITHM",
+    "MODULE",
+    "NORMAL",
+    "OBFUSCATED",
+    "PREAMBLE",
+    "QUADRICEP",
+    "RELOCATE",
+    "SUBLIMATE",
+    "THICK",
+    "UNVEIL",
+    "VELOCITY",
+    "WIZARD",
+    "XYLO",
+    "YES",
+    "ZOID",
+    " APHORISM"
+]
+full_permutation_deck = {
+    word[0]: word_deck(full_identity_deck, word)
+    for word in permutation_words
+}
+
+full_cipher = DeckCipher.from_decks(full_identity_deck, full_permutation_deck)
+
+cipher_decipher(full_cipher, "HOW MUCH WOOD COULD A WOODCHUCK CHUCK IF A WOODCHUCK COULD CHUCK WOOD")
