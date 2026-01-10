@@ -25,7 +25,7 @@ Taking another large logical leap: if the resultant cipher was somewhat represen
 
 #### Findings / Results
 
-**Permutation Representation***
+**Permutation Representation**
 
 I wanted to construct a convenient way to represent permutations with alphabets like I had seen in the discord.
 What I ended up with was an identity deck represented just as the ordered alphabet, a set of different permutation decks represented as other jumbled alphabets, and the concept of a permutation as the required swaps to go from the identity deck to any given permutation deck.
