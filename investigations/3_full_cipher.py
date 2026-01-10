@@ -52,3 +52,11 @@ BFLVODQZ SPYF GCB*DGE*NK^ *US#XHOMLIEWCS$YCNQ( CTO^#FU%WEVURMIN #SL*@#
 CFKVNDPZ QOYF GBC*DGE*MJ^ *TQ#XHNLKREWBQ$YBMP( BSN^#FT%WEVTULRM #QK*@#
 """
 
+"""
+What about with ciphertext which may be slightly different for each:
+"""
+
+print(full_cipher.encipher("FIRST NOW CONGRATULATIONS FOR SOLVING  WE WILL SHOW YOU THE SECRETS"))
+print(full_cipher.encipher("SECOND CONGRATULATIONS THIS WILL SHOW YOU MORE SECRETS"))
+print(full_cipher.encipher("THIRD CONGRATULATIONS THIS IS FINAL SECRETS"))
+
